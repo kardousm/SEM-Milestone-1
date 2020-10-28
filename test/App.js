@@ -2,11 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button} from 'react-native';
 import * as Speech from 'expo-speech';
-import ExpoTest from './ExpoTest'
-import ImageTest from './ImageTest'
+import TextToSpeech from './screens/TextToSpeech'
+import ImageCapture from './screens/ImageCapture'
 import * as firebase from 'firebase';
 import "firebase/database";
 import "firebase/storage";
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 /*
 const firebaseConfig = {
@@ -68,27 +71,19 @@ const styles = StyleSheet.create({
 export default App;
 */
 
+const RootStack = createStackNavigator(); 
 
 class App extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
-        <ImageTest/>
-      </View>
+      <NavigationContainer>
+      <RootStack.Navigator>
+        <RootStack.Screen name="ImageCapture" component={ImageCapture} options={{ headerShown: false }}/>
+        <RootStack.Screen name="TextToSpeech" component={TextToSpeech} options={{ headerShown: false }}/>
+      </RootStack.Navigator>
+    </NavigationContainer>
   );
 }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
 export default App;
-
-
